@@ -23,7 +23,7 @@ public enum TaskStatus {
     public String getLabel() {
         switch (this) {
             case OPEN:
-                return "Offen";
+                return "Verfügbar";
             case IN_PROGRESS:
                 return "In Bearbeitung";
             case FINISHED:
