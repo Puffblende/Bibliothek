@@ -89,7 +89,7 @@ public class DashboardContent implements DashboardContentProvider {
 
             switch (status) {
                 case OPEN:
-                    icon = "doc-text";
+                    icon = "doc";
                     break;
                 case IN_PROGRESS:
                     icon = "rocket";
@@ -136,6 +136,9 @@ public class DashboardContent implements DashboardContentProvider {
         if (status != null) {
             href = WebUtils.addQueryParameter(href, "search_status", status.toString());
         }
+        
+     
+          
 
         DashboardTile tile = new DashboardTile();
         tile.setLabel(label);
