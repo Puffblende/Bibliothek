@@ -29,7 +29,7 @@ public enum TaskStatus {
             case FINISHED:
                 return "Überzogen";
             case CANCELED:
-                return "Reserviert";
+                return "frei";
             case POSTPONED:
                 return "Zurückgestellt";
             default:
