@@ -137,8 +137,10 @@ public class DashboardContent implements DashboardContentProvider {
             href = WebUtils.addQueryParameter(href, "search_status", status.toString());
         }
         
+
+    
      
-          
+    
 
         DashboardTile tile = new DashboardTile();
         tile.setLabel(label);

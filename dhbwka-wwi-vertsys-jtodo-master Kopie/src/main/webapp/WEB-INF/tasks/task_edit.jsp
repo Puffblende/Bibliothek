@@ -51,11 +51,10 @@
                     <input type="text" name="task_owner" value="${task_form.values["task_owner"][0]}" readonly="readonly">
                 </div>
                 
-                <label for="verliehen">Verliehen an:</label>
+                 <label for="task_do">Verliehen an</label>
                 <div class="side-by-side">
-                    <input type="text" name="task_owner" value="${task_form.values["task_owner"][0]}" readonly="readonly">
+                    <input type="text" name="task_do" value="${task_form.values["task_owner"][0]}" >
                 </div>
-              
 
                 <label for="task_category">Kategorie:</label>
                 <div class="side-by-side">
