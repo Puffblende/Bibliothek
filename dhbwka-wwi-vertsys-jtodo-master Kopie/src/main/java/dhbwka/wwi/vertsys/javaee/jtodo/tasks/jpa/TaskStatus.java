@@ -25,11 +25,11 @@ public enum TaskStatus {
             case OPEN:
                 return "Verfügbar";
             case IN_PROGRESS:
-                return "In Bearbeitung";
+                return "Ausgeliehen";
             case FINISHED:
-                return "Erledigt";
+                return "Überzogen";
             case CANCELED:
-                return "Abgebrochen";
+                return "Reserviert";
             case POSTPONED:
                 return "Zurückgestellt";
             default:

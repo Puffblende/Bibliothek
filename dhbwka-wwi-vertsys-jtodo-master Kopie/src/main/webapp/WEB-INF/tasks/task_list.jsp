@@ -84,6 +84,7 @@
                             <th>Eigentümer</th>
                             <th>Status</th>
                             <th>Fällig am</th>
+                            <th>Verliehen an</th>
                         </tr>
                     </thead>
                     <c:forEach items="${tasks}" var="task">
