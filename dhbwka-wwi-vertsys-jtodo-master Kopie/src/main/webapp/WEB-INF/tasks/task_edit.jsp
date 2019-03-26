@@ -75,7 +75,7 @@
                 </label>
                 <div class="side-by-side">
                     <input type="text" name="task_due_date" value="${task_form.values["task_due_date"][0]}">
-                    <input type="text" name="task_due_time" value="${task_form.values["task_due_time"][0]}">
+                    <!--<input type="text" name="task_due_time" value="${task_form.values["task_due_time"][0]}">-->
                 </div>
 
                 <label for="task_status">

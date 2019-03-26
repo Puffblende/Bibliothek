@@ -58,26 +58,24 @@ public class Task implements Serializable {
     @NotNull(message = "Das Datum darf nicht leer sein.")
     private Date dueDate;
 
-    @NotNull(message = "Die Uhrzeit darf nicht leer sein.")
+    //@NotNull(message = "Die Uhrzeit darf nicht leer sein.")
     private Time dueTime;
 
     @Enumerated(EnumType.STRING)
     @NotNull
     private TaskStatus status = TaskStatus.OPEN;
-    
-    
 
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public Task() {
     }
 
-    public Task(User owner, Category category, String shortText, String longText, Date dueDate, Time dueTime) {
+    public Task(User owner, Category category, String shortText, String longText, Date dueDate) {
         this.owner = owner;
         this.category = category;
         this.shortText = shortText;
         this.longText = longText;
         this.dueDate = dueDate;
-        this.dueTime = dueTime;
+        //this.dueTime = dueTime;
     }
     //</editor-fold>
 
