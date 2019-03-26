@@ -113,7 +113,7 @@ public class TaskEditServlet extends HttpServlet {
 
         String taskCategory = request.getParameter("task_category");
         String taskDueDate = request.getParameter("task_due_date");
-        //String taskDueTime = request.getParameter("task_due_time");
+        String taskDueTime = request.getParameter("task_due_time");
         String taskStatus = request.getParameter("task_status");
         String taskShortText = request.getParameter("task_short_text");
         String taskLongText = request.getParameter("task_long_text");
@@ -129,7 +129,7 @@ public class TaskEditServlet extends HttpServlet {
         }
 
         Date dueDate = WebUtils.parseDate(taskDueDate);
-        //Time dueTime = WebUtils.parseTime(taskDueTime);
+        Time dueTime = WebUtils.parseTime(taskDueTime);
 
         if (dueDate != null) {
             task.setDueDate(dueDate);
@@ -137,11 +137,11 @@ public class TaskEditServlet extends HttpServlet {
             errors.add("Das Datum muss dem Format dd.mm.yyyy entsprechen.");
         }
 
-        /*if (dueTime != null) {
+        if (dueTime != null) {
             task.setDueTime(dueTime);
         } else {
             errors.add("Die Uhrzeit muss dem Format hh:mm:ss entsprechen.");
-        }*/
+        }
 
         try {
             task.setStatus(TaskStatus.valueOf(taskStatus));
@@ -208,7 +208,7 @@ public class TaskEditServlet extends HttpServlet {
         Task task = new Task();
         task.setOwner(this.userBean.getCurrentUser());
         task.setDueDate(new Date(System.currentTimeMillis()));
-        //task.setDueTime(new Time(System.currentTimeMillis()));
+        task.setDueTime(new Time(System.currentTimeMillis()));
 
         // ID aus der URL herausschneiden
         String taskId = request.getPathInfo();
@@ -260,9 +260,9 @@ public class TaskEditServlet extends HttpServlet {
             WebUtils.formatDate(task.getDueDate())
         });
 
-       /* values.put("task_due_time", new String[]{
+        values.put("task_due_time", new String[]{
             WebUtils.formatTime(task.getDueTime())
-        });*/
+        });
 
         values.put("task_status", new String[]{
             task.getStatus().toString()
