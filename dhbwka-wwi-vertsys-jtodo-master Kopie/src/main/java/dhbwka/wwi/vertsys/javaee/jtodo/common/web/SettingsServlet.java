@@ -11,8 +11,10 @@ package dhbwka.wwi.vertsys.javaee.jtodo.common.web;
 
 import dhbwka.wwi.vertsys.javaee.jtodo.common.ejb.UserBean;
 import dhbwka.wwi.vertsys.javaee.jtodo.common.ejb.ValidationBean;
+import dhbwka.wwi.vertsys.javaee.jtodo.common.jpa.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,54 +29,20 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "SettingsServlet", urlPatterns = {"/app/settings/"})
 public class SettingsServlet extends HttpServlet {
     
-    
-    @EJB 
+    @EJB    
     ValidationBean validationBean;
     
     @EJB
     UserBean userBean;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SettingsServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SettingsServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         request.getSession().setAttribute("User", this.userBean.getCurrentUser());
         
-        request.getRequestDispatcher("/WEB-INF/login/change_userdata.jsp").forward(request, response); 
+        request.getRequestDispatcher("/WEB-INF/login/change_userdata.jsp").forward(request, response);        
         
     }
 
@@ -89,10 +57,48 @@ public class SettingsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
         
-        //User user = this.userBean.getCurrentUser();
+        User user = this.userBean.getCurrentUser();
         
+        String first_name = request.getParameter("change_first_name");
+        String last_name = request.getParameter("change_last_name");
+        String password1 = request.getParameter("change_password1");
+        String password2 = request.getParameter("change_password2");
+        
+        List<String> errors = this.validationBean.validate(user);
+        
+        if (errors.isEmpty()) {
+            if (first_name.isEmpty()) {
+                
+            } else {
+                this.userBean.changeFirstName(user, first_name);
+            }
+            if(last_name.isEmpty()){
+                
+            }else{
+                this.userBean.changeLastName(user, last_name);
+            }
+            if(password2.isEmpty()){
+                
+            }else if (password1.isEmpty()){
+                errors.add("Bitte tragen Sie das alte Passwort ein!");
+            }else{
+                try {
+                    this.userBean.changePassword(user, password1, password2);
+                } catch (UserBean.InvalidCredentialsException ex) {
+                    errors.add(ex.getMessage());
+                }
+            }
+            
+            
+        }
+        
+        if (errors.isEmpty()){
+            response.sendRedirect(WebUtils.appUrl(request, "/app/dashboard/"));
+        }else{
+            response.sendRedirect(request.getRequestURI());
+        }
         
     }
 

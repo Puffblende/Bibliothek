@@ -72,6 +72,18 @@ public class UserBean {
         user.setPassword(newPassword);
     }
     
+    @RolesAllowed("app-user")
+    public void changeFirstName(User user, String first_name){
+        user.setFirst_name(first_name);
+        em.merge(user);
+    }
+    
+    @RolesAllowed("app-user")
+    public void changeLastName(User user, String last_name){
+        user.setLast_name(last_name);
+        em.merge(user);
+    }
+    
     /**
      * Benutzer löschen
      * @param user Zu löschender Benutzer
