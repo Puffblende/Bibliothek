@@ -34,6 +34,9 @@
         <div class="menuitem">
             <a href="<c:url value="/app/tasks/categories/"/>">Neues Genre anlegen</a>
         </div>
+        <div class="menuitem">
+            <a href="<c:url value="/app/settings/"/>">Konto-Einstellungen</a>
+        </div>
     </jsp:attribute>
 
     <jsp:attribute name="content">
