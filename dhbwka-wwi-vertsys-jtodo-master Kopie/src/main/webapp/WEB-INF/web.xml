@@ -36,6 +36,11 @@
             <url-pattern>/app/*</url-pattern>
         </web-resource-collection>
         
+        <web-resource-collection>
+            <web-resource-name>rest-api</web-resource-name>
+            <url-pattern>/webresources/*</url-pattern>
+        </web-resource-collection>
+        
         <!--
             Ein Benutzer muss die Rolle "app-user" besitzen, um die
             Seiten aufrufen zu können.
