@@ -52,6 +52,8 @@ public class Task implements Serializable {
     @NotNull(message = "Die Bezeichnung darf nicht leer sein.")
     @Size(min = 1, max = 50, message = "Die Bezeichnung muss zwischen ein und 50 Zeichen lang sein.")
     private String shortText;
+    
+    private String verliehenAn;
 
     @Lob
     @NotNull
@@ -147,6 +149,17 @@ public class Task implements Serializable {
     public void setStatus(TaskStatus status) {
         this.status = status;
     }
-    //</editor-fold>
+    public String getVerliehenAn() {
+        return verliehenAn;
+    }
+
+    public void setVerliehenAn(String verliehenAn) {
+        this.verliehenAn = verliehenAn;
+    }
 
 }
+
+    
+  
+    //</editor-fold>
+

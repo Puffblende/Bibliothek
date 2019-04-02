@@ -15,7 +15,7 @@
 
 <template:base>
     <jsp:attribute name="title">
-        Liste der Aufgaben
+        Liste der Bücher
     </jsp:attribute>
 
     <jsp:attribute name="head">
@@ -83,7 +83,7 @@
                             <th>Kategorie</th>
                             <th>Eigentümer</th>
                             <th>Status</th>
-                            <th>Fällig am</th>
+                            <th>Verfügbar seit</th>
                             <th>Verliehen an</th>
                         </tr>
                     </thead>
@@ -106,6 +106,9 @@
                             <td>
                                 <c:out value="${utils.formatDate(task.dueDate)}"/>
                                 <!--<c:out value="${utils.formatTime(task.dueTime)}"/>-->
+                            </td>
+                            <td>
+                                <c:out value="${task.verliehenAn}"/>
                             </td>
                         </tr>
                     </c:forEach>

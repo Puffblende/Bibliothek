@@ -53,7 +53,7 @@
                 
                  <label for="task_do">Verliehen an</label>
                 <div class="side-by-side">
-                    <input type="text" name="task_do" value="${task_form.values["task_owner"][0]}" >
+                    <input type="text" name="verliehen_an" value="${task_form.values["task_owner"][0]}" >
                 </div>
 
                 <label for="task_category">Kategorie:</label>
@@ -70,7 +70,7 @@
                 </div>
 
                 <label for="task_due_date">
-                    Fällig am:
+                    Verfügbar seit:
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">

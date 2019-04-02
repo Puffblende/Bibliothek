@@ -117,6 +117,7 @@ public class TaskEditServlet extends HttpServlet {
         String taskStatus = request.getParameter("task_status");
         String taskShortText = request.getParameter("task_short_text");
         String taskLongText = request.getParameter("task_long_text");
+        String task_verliehenAn = request.getParameter("verliehen_an");
 
         Task task = this.getRequestedTask(request);
 
@@ -151,6 +152,8 @@ public class TaskEditServlet extends HttpServlet {
 
         task.setShortText(taskShortText);
         task.setLongText(taskLongText);
+        
+        task.setVerliehenAn(task_verliehenAn);
 
         this.validationBean.validate(task, errors);
 
