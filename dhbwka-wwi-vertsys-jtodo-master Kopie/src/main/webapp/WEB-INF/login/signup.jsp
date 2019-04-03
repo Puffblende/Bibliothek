@@ -51,7 +51,7 @@
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="signup_first_name" value="${signup_form.values["signup_password1"][0]}">
+                        <input type="text" name="signup_first_name" value="">
                     </div>
                     
                     <label for="signup_password1">
@@ -59,7 +59,7 @@
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="signup_last_name" value="${signup_form.values["signup_password1"][0]}">
+                        <input type="text" name="signup_last_name" value="">
                     </div>
 
                     <label for="signup_password1">
