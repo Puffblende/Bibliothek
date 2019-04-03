@@ -11,7 +11,6 @@ package service;
 
 import dhbwka.wwi.vertsys.javaee.jtodo.common.jpa.User;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,8 +23,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import service.dataClasses.UserDTO;
-import service.dataClasses.UserFacade;
 
 /**
  *
@@ -37,10 +34,6 @@ public class UserFacadeREST extends AbstractFacade<User> {
 
     @PersistenceContext(unitName = "default")
     private EntityManager em;
-    
-    @EJB
-    UserFacade userFacade;
-
 
     public UserFacadeREST() {
         super(User.class);
@@ -74,9 +67,10 @@ public class UserFacadeREST extends AbstractFacade<User> {
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public List<UserDTO> findAllDTO() {
-        return userFacade.findAllUser();
+    @Override
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<User> findAll() {
+        return super.findAll();
     }
 
     @GET
