@@ -57,7 +57,7 @@ public class UserBean {
     }
 
     /**
-     * Passwort ändern (ohne zu speichern)
+     * Passwort ändern (mit speichern)
      * @param user
      * @param oldPassword
      * @param newPassword
@@ -70,6 +70,7 @@ public class UserBean {
         }
 
         user.setPassword(newPassword);
+        em.merge(user);
     }
     
     @RolesAllowed("app-user")
