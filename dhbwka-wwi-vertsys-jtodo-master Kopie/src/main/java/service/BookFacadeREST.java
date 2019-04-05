@@ -9,7 +9,7 @@
  */
 package service;
 
-import dhbwka.wwi.vertsys.javaee.dieBibliothek.common.jpa.User;
+import dhbwka.wwi.vertsys.javaee.dieBibliothek.books.jpa.Book;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -24,64 +24,77 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import service.dataClasses.UserDTO;
-import service.dataClasses.UserFacade;
+import service.dataClasses.BookDTO;
+import service.dataClasses.BookFacade;
 
 /**
  *
  * @author eisert
  */
 @Stateless
-@Path("api/user")
-public class UserFacadeREST extends AbstractFacade<User> {
+@Path("api/book")
+public class BookFacadeREST extends AbstractFacade<Book> {
 
     @PersistenceContext(unitName = "default")
     private EntityManager em;
-    
-    @EJB
-    UserFacade userFacade;
 
-    public UserFacadeREST() {
-        super(User.class);
+    @EJB
+    BookFacade bookFacade;
+
+    public BookFacadeREST() {
+        super(Book.class);
     }
 
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(User entity) {
+    public void create(Book entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") String id, User entity) {
+    public void edit(@PathParam("id") Long id, Book entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") String id) {
+    public void remove(@PathParam("id") Long id) {
         super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public User find(@PathParam("id") String id) {
+    public Book find(@PathParam("id") Long id) {
         return super.find(id);
     }
-
+    
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public List<UserDTO> findAllUsers() {
-        return userFacade.findAllUser();
+    @Path("name/{name}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<BookDTO> findbyName(@PathParam("name") String name) {
+        return bookFacade.findAllBookName(name);
     }
+
+    /*@GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<BookDTO> findAllBook() {
+        return bookFacade.findAllBooks();
+   }*/
+    
+     @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<BookDTO> findAllBooks() {
+        return bookFacade.findAllBooks();
+   }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<User> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Book> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
@@ -96,5 +109,5 @@ public class UserFacadeREST extends AbstractFacade<User> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

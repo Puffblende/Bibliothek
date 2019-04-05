@@ -9,8 +9,8 @@
  */
 package service.dataClasses;
 
-import dhbwka.wwi.vertsys.javaee.jtodo.common.ejb.UserBean;
-import dhbwka.wwi.vertsys.javaee.jtodo.common.jpa.User;
+import dhbwka.wwi.vertsys.javaee.dieBibliothek.common.ejb.UserBean;
+import dhbwka.wwi.vertsys.javaee.dieBibliothek.common.jpa.User;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.ejb.EJB;

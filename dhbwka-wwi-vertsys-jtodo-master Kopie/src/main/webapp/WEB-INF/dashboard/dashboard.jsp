@@ -24,15 +24,15 @@
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/app/tasks/list/"/>">Liste</a>
+            <a href="<c:url value="/app/books/list/"/>">Liste</a>
         </div>
 
         <div class="menuitem">
-            <a href="<c:url value="/app/tasks/task/new/"/>">Neues Buch anlegen</a>
+            <a href="<c:url value="/app/books/book/new/"/>">Neues Buch anlegen</a>
         </div>
 
         <div class="menuitem">
-            <a href="<c:url value="/app/tasks/categories/"/>">Neues Genre anlegen</a>
+            <a href="<c:url value="/app/books/categories/"/>">Neues Genre anlegen</a>
         </div>
         <div class="menuitem">
             <a href="<c:url value="/app/settings/"/>">Konto-Einstellungen</a>
@@ -47,7 +47,7 @@
                 </p>
             </c:when>
             <c:otherwise>
-                <jsp:useBean id="utils" class="dhbwka.wwi.vertsys.javaee.jtodo.common.web.WebUtils"/>
+                <jsp:useBean id="utils" class="dhbwka.wwi.vertsys.javaee.dieBibliothek.common.web.WebUtils"/>
 
                 <c:forEach items="${sections}" var="section">
                     <h2>

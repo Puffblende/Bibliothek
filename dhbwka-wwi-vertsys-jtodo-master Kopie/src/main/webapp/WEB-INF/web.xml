@@ -67,7 +67,7 @@
     -->
     <security-role>
         <description>
-            Ein Benutzer der jTodo-Beispielanwendung. Jeder Benutzer muss
+            Ein Benutzer der DieBibliothek-Beispielanwendung. Jeder Benutzer muss
             mindestens diese Rolle besitzen, um sich einloggen und neue
             Aufgaben anlegen zu können.
         </description>
