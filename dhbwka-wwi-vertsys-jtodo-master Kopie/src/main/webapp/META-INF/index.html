@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!--
+Copyright © 2018 Dennis Schulmeister-Zimolong
+
+E-Mail: dhbw@windows3.de
+Webseite: https://www.wpvs.de/
+
+Dieser Quellcode ist lizenziert unter einer
+Creative Commons Namensnennung 4.0 International Lizenz.
+-->
+<html>
+
+<head>
+    <title>REST-Webservice-Beispiel: AJAX-Client</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="./UserResource.js"></script>
+    <script src="GenreResource.js"></script>
+    <script src="BookResource.js"></script>
+</head>
+
+<body>
+    <h1>REST-Webservice für: Die Bibliothek</h1>
+
+    <!-- Felder, um die User auszulesen -->
+    <div class="row">
+    <div class="item stacked">
+        <div class="column">
+            <label for="all_user">User</label>
+            <div class="side-by-side">
+                <div class="side-by-side">
+                    <button id="findUsers" onclick="reloadUsers()">
+                        Alle abrufen
+                    </button>
+                </div>
+            </div>
+            <div id="container">
+                <div id="userList"></div>
+            </div>
+        </div>
+    </div>
+    <div class="item stacked">
+        <div class="column">
+            <label for="all_user">Genre</label>
+            <div class="side-by-side">
+                <div class="side-by-side">
+                    <button id="findUsers" onclick="reloadGenres()">
+                        Alle abrufen
+                    </button>
+                </div>
+            </div>
+            <div id="container">
+                <div id="genreList"></div>
+            </div>
+        </div>
+    </div>
+    <div class="item stacked">
+        <div class="column">
+            <label for="all_user">Books</label>
+            <div class="side-by-side">
+                <div class="side-by-side">
+                    <button id="findUsers" onclick="reloadBooks()">
+                        Alle abrufen
+                    </button>
+                </div>
+            </div>
+            <div id="container">
+                <div id="bookList"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+    <!-- Ab hier fängt es an, Spaß zu machen 🤩 -->
+    <script>
+        userResource = new UserResource();
+        genreResource = new GenreResource();
+        bookResource = new BookResource();
+
+        let reloadUsers = async () => {
+            let response = await userResource.findAllUser();
+
+            if ("exception" in response) {
+                alert(`[${response.exception}]: ${response.message}`)
+            } else {
+                let usersElement = document.getElementById("userList");
+                usersElement.innerHTML = "";
+
+                response.forEach(userList => {
+                    // Empfangene Daten anzeigen
+                    let userElement = document.createElement("div");
+                    userElement.classList.add("added");
+                    usersElement.appendChild(userElement);
+                    userElement.innerHTML =
+                        `<span class="label">Username:</span> ${userList.username} <br/>` +
+                        `<span class="label">Vorname:</span> ${userList.first_name} <br/>` +
+                        `<span class="label">Nachname:</span> ${userList.last_name} <br/>`;
+                });
+            }
+        };
+
+        let reloadGenres = async () => {
+            let response = await genreResource.findAllGenre();
+
+            if ("exception" in response) {
+                alert(`[${response.exception}]: ${response.message}`)
+            } else {
+                let genresElement = document.getElementById("genreList");
+                genresElement.innerHTML = "";
+
+                response.forEach(genreList => {
+                    // Empfangene Daten anzeigen
+                    let genreElement = document.createElement("div");
+                    genreElement.classList.add("added");
+                    genresElement.appendChild(genreElement);
+                    genreElement.innerHTML =
+                        `${genreList.name}`
+
+                    ;
+                });
+            }
+
+        }
+
+        let reloadBooks = async () => {
+            let response = await bookResource.findAllBoooks();
+
+            if ("exception" in response) {
+                alert(`[${response.exception}]: ${response.message}`)
+            } else {
+                let booksElement = document.getElementById("bookList");
+                booksElement.innerHTML = "";
+
+                response.forEach(bookList => {
+                    // Empfangene Daten anzeigen
+                    let bookElement = document.createElement("div");
+                    bookElement.classList.add("added");
+                    booksElement.appendChild(bookElement);
+                    bookElement.innerHTML =
+                        `<span class="label">Titel:</span> ${bookList.name} <br/>` +
+                        `<span class="label">Verliehen an:</span> ${bookList.lend_to} <br/>` +
+                        `<span class="label">Status:</span> ${bookList.status.status} <br/>` +
+                        `<span class="label">Besitzer:</span> ${bookList.owner.username} <br/>` +
+                        `<span class="label">Genre:</span> ${bookList.genre.name} <br/>`+
+                        `<span class="label">Verfügbar seit:</span> ${bookList.due_date} <br/>`
+
+                    ;
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
